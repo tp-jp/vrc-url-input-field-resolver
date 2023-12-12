@@ -1,0 +1,15 @@
+{
+    "name": "com.tp.jp.vrc-url-input-field-resolver.Editor",
+    "references": ["GUID:6e9c6119ac4eb334284fb7b4bc6d1f05"],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
