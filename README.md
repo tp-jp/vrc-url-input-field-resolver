@@ -22,7 +22,7 @@ VCCから任意のプロジェクトを選択し、「Manage Project」から「
 リポジトリを使わずに導入したい場合は [releases](https://github.com/tp-jp/vrc-url-input-field-resolver/releases) から unitypackage をダウンロードして、プロジェクトにインポートしてください。
 
 ## 使い方
-UnityProjectを開いた際に自動で復元処理が実行されるため、何か実行する必要はありません。
+シーンを開いた際に自動で処理が実行されるため、手動で実行する必要はありません。
 
 ## 更新履歴
 [CHANGELOG](CHANGELOG.md)
