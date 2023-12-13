@@ -54,7 +54,7 @@ namespace TpLab.VrcUrlInputFieldResolver.Editor
         /// <summary>
         /// プレハブ内の欠落しているスクリプトを検出し、対応するフォルダの一覧
         /// </summary>
-        /// <returns></returns>
+        /// <returns>フォルダ一覧</returns>
         static string[] FindFoldersWithMissingScripts()
         {
             return AssetDatabase
