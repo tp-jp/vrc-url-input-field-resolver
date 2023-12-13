@@ -18,6 +18,7 @@ vpm add repo https://tp-jp.github.io/vpm-repos/index.json
 
 VCCから任意のプロジェクトを選択し、「Manage Project」から「Manage Packages」を開きます。
 一覧の中から `VRCUrlInputFieldResolver` の右にある「＋」ボタンをクリックするか「Installed Vection」から任意のバージョンを選択することで、プロジェクトにインポートします。 
+![image](https://github.com/tp-jp/vrc-url-input-field-resolver/assets/130125691/4b19f7ca-469d-4b1c-a0b1-7e46828f5b99)
 
 リポジトリを使わずに導入したい場合は [releases](https://github.com/tp-jp/vrc-url-input-field-resolver/releases) から unitypackage をダウンロードして、プロジェクトにインポートしてください。
 
