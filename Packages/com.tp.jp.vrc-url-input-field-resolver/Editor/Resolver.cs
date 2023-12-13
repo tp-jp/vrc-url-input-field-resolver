@@ -11,6 +11,8 @@ namespace TpLab.VrcUrlInputFieldResolver.Editor
 {
     public static class Resolver
     {
+        static bool _isReopeningScene;
+        
         [InitializeOnLoadMethod]
         static void OnLoad()
         {
@@ -24,6 +26,8 @@ namespace TpLab.VrcUrlInputFieldResolver.Editor
         /// <param name="mode">シーンを開くモード</param>
         static void OnSceneOpened(Scene scene, OpenSceneMode mode)
         {
+            if (_isReopeningScene) return;
+
             // Missing check
             if (!DetectMissingScripts(scene))
             {
@@ -32,12 +36,12 @@ namespace TpLab.VrcUrlInputFieldResolver.Editor
             Log("Resolving...");
 
             // Reload SDK
-            Log("Reload SDK");
+            // Log("Reload SDK");
             var targetPaths = FindFoldersWithMissingScripts();
             ReloadUtil.ReloadSDK(false);
 
             // Reimport
-            Log("Reimport");
+            // Log("Reimport");
             foreach (var path in targetPaths)
             {
                 AssetDatabase.ImportAsset(path, ImportAssetOptions.ImportRecursive);
@@ -80,9 +84,11 @@ namespace TpLab.VrcUrlInputFieldResolver.Editor
             {
                 try
                 {
+                    _isReopeningScene = true;
                     EditorSceneManager.OpenScene(scene.path);
+                    _isReopeningScene = false;
                     Log("Resolved.");
-                    break;
+                    yield break;
                 }
                 catch (Exception)
                 {
@@ -90,6 +96,7 @@ namespace TpLab.VrcUrlInputFieldResolver.Editor
                 }
                 yield return new WaitForSeconds(1f);
             }
+            LogError("Failed to reopen scene.");
         }
 
         /// <summary>
@@ -124,6 +131,15 @@ namespace TpLab.VrcUrlInputFieldResolver.Editor
         static void Log(string message)
         {
             Debug.Log($"[<color=#4EC9B0>VRCUrlInputFieldResolver</color>]: {message}");
+        }
+        
+        /// <summary>
+        /// エラーログを出力する。
+        /// </summary>
+        /// <param name="message">メッセージ</param>
+        static void LogError(string message)
+        {
+            Debug.LogError($"[<color=#4EC9B0>VRCUrlInputFieldResolver</color>]: {message}");
         }
     }
 }

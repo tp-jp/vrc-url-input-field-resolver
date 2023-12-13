@@ -1,7 +1,7 @@
 {
   "name": "com.tp.jp.vrc-url-input-field-resolver",
   "displayName": "VRCUrlInputFieldResolver",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "unity": "2019.4",
   "description": "VRCUrlInputFiled\u306eMissingScript\u3092\u89e3\u6c7a\u3059\u308b\u30c4\u30fc\u30eb\u3002",
   "gitDependencies": {},
