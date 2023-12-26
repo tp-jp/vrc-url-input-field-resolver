@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VRC.SDKBase.Editor;
 using VRC.SDKBase.Editor.Source.Helpers;
 
 namespace TpLab.VrcUrlInputFieldResolver.Editor
@@ -12,13 +13,25 @@ namespace TpLab.VrcUrlInputFieldResolver.Editor
     public static class Resolver
     {
         static bool _isReopeningScene;
+        static bool _isBuilding;
         
         [InitializeOnLoadMethod]
         static void OnLoad()
         {
             EditorSceneManager.sceneOpened += OnSceneOpened;
+            VRCSdkControlPanel.OnSdkPanelEnable += AddBuildHook;
         }
 
+        static void AddBuildHook(object sender, EventArgs e)
+        {
+            if (VRCSdkControlPanel.TryGetBuilder<IVRCSdkBuilderApi>(out var builder))
+            {
+                builder.OnSdkBuildStart += (s, ex) => _isBuilding = true;
+                builder.OnSdkBuildFinish += (s, ex) => _isBuilding = false;
+                builder.OnSdkBuildSuccess += (s, ex) => _isBuilding = false;
+            }
+        }
+        
         /// <summary>
         /// シーンを開いた際に呼ばれるイベント。
         /// </summary>
@@ -26,6 +39,7 @@ namespace TpLab.VrcUrlInputFieldResolver.Editor
         /// <param name="mode">シーンを開くモード</param>
         static void OnSceneOpened(Scene scene, OpenSceneMode mode)
         {
+            if (_isBuilding) return;
             if (_isReopeningScene) return;
 
             // Missing check
