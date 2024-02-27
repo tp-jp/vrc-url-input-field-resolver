@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "com.tp.jp.vrc-url-input-field-resolver": {
-      "version": "file:com.tp.jp.vrc-url-input-field-resolver",
+    "com.tp-lab.vrc-url-input-field-resolver": {
+      "version": "file:com.tp-lab.vrc-url-input-field-resolver",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}

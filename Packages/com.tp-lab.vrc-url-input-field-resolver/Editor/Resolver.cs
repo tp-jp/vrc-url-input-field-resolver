@@ -5,46 +5,20 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using VRC.SDKBase.Editor;
 using VRC.SDKBase.Editor.Source.Helpers;
 
 namespace TpLab.VrcUrlInputFieldResolver.Editor
 {
     public static class Resolver
     {
-        static bool _isReopeningScene;
-        static bool _isBuilding;
-        
-        [InitializeOnLoadMethod]
-        static void OnLoad()
+        [MenuItem("TpLab/VRCUrlInputField")]
+        public static void Resolve()
         {
-            EditorSceneManager.sceneOpened += OnSceneOpened;
-            VRCSdkControlPanel.OnSdkPanelEnable += AddBuildHook;
-        }
-
-        static void AddBuildHook(object sender, EventArgs e)
-        {
-            if (VRCSdkControlPanel.TryGetBuilder<IVRCSdkBuilderApi>(out var builder))
-            {
-                builder.OnSdkBuildStart += (s, ex) => _isBuilding = true;
-                builder.OnSdkBuildFinish += (s, ex) => _isBuilding = false;
-                builder.OnSdkBuildSuccess += (s, ex) => _isBuilding = false;
-            }
-        }
-        
-        /// <summary>
-        /// シーンを開いた際に呼ばれるイベント。
-        /// </summary>
-        /// <param name="scene">開いたシーン</param>
-        /// <param name="mode">シーンを開くモード</param>
-        static void OnSceneOpened(Scene scene, OpenSceneMode mode)
-        {
-            if (_isBuilding) return;
-            if (_isReopeningScene) return;
-
             // Missing check
+            var scene = EditorSceneManager.GetActiveScene();
             if (!DetectMissingScripts(scene))
             {
+                Log("No missing scripts.");
                 return;
             }
             Log("Resolving...");
@@ -98,9 +72,7 @@ namespace TpLab.VrcUrlInputFieldResolver.Editor
             {
                 try
                 {
-                    _isReopeningScene = true;
                     EditorSceneManager.OpenScene(scene.path);
-                    _isReopeningScene = false;
                     Log("Resolved.");
                     yield break;
                 }
