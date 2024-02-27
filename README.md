@@ -1,4 +1,5 @@
 # VRCUrlInputFieldResolver
+
 VRCUrlInputFiledのMissingScriptを解決するツール。  
 VRChatのワールド作成時などにご利用ください。
 
@@ -23,7 +24,9 @@ VCCから任意のプロジェクトを選択し、「Manage Project」から「
 リポジトリを使わずに導入したい場合は [releases](https://github.com/tp-jp/vrc-url-input-field-resolver/releases) から unitypackage をダウンロードして、プロジェクトにインポートしてください。
 
 ## 使い方
-シーンを開いた際に自動で処理が実行されるため、手動で実行する必要はありません。
+
+ツールバーから `TpLab > VRCUrlInputFieldResolver` を選択。
 
 ## 更新履歴
+
 [CHANGELOG](CHANGELOG.md)
